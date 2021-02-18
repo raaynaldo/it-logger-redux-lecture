@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import LogItem from './LogItem';
+import propTypes from 'prop-types';
 import Preloader from '../layout/Preloader';
 
-const Logs = () => {
+const Logs = ({ log: { logs, loading } }) => {
     const [logs, setLogs] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -40,4 +42,12 @@ const Logs = () => {
     );
 };
 
-export default Logs;
+Logs.propTypes = {
+    log: propTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+    log: state.log,
+});
+
+export default connect(mapStateToProps)(Logs);
