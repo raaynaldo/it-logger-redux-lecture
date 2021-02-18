@@ -69,7 +69,7 @@ const AddLogModal = ({ addLog }) => {
                 <div className='row'>
                     <div className='input-field'>
                         <p>
-                            <label htmlFor=''>
+                            <label>
                                 <input
                                     type='checkbox'
                                     className='filled-in'
@@ -97,7 +97,7 @@ const AddLogModal = ({ addLog }) => {
 };
 
 AddLogModal.propTypes = {
-    addLog: PropTypes.object.isRequired,
+    addLog: PropTypes.func.isRequired,
 };
 
 const modalStyle = {
