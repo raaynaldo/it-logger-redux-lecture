@@ -13,7 +13,6 @@ export const getTechs = () => async (dispatch) => {
 
         const res = await fetch('/techs');
         const data = await res.json();
-
         dispatch({
             type: GET_TECHS,
             payload: data,
@@ -30,7 +29,7 @@ export const addTech = (tech) => async (dispatch) => {
     try {
         setLoading();
 
-        const res = await fetch('techs', {
+        const res = await fetch('/techs', {
             method: 'POST',
             body: JSON.stringify(tech),
             headers: {
@@ -45,7 +44,27 @@ export const addTech = (tech) => async (dispatch) => {
         });
     } catch (error) {
         dispatch({
-            type: ERROR_TECH,
+            type: TECHS_ERROR,
+            payload: error.response.statusText,
+        });
+    }
+};
+
+export const deleteTech = (id) => async (dispatch) => {
+    try {
+        setLoading();
+
+        await fetch(`/techs/${id}`, {
+            method: 'DELETE',
+        });
+
+        dispatch({
+            type: DELETE_TECH,
+            payload: id,
+        });
+    } catch (error) {
+        dispatch({
+            type: TECHS_ERROR,
             payload: error.response.statusText,
         });
     }
